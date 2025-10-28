@@ -19,9 +19,8 @@ public class AsyncBehaviorScenariosTest {
 
     /**
      * Scenario 1: Synchronous trigger of async method
-     *
-     * Verifies that the async method runs in a separate thread and
-     * completes successfully when the main thread waits for it.
+     *  Verifies that the async method runs in a separate thread and
+     *  completes successfully when the main thread waits for it.
      */
     @Test
     void testAsyncRunsInSeparateThreadSyncTrigger() {
@@ -42,9 +41,8 @@ public class AsyncBehaviorScenariosTest {
 
     /**
      * Scenario 2: Non-blocking trigger of async method
-     *
-     * Verifies that the main thread is not blocked and the async
-     * method completes independently in a separate thread.
+     *  Verifies that the main thread is not blocked and the async
+     *  method completes independently in a separate thread.
      */
     @Test
     void testAsyncRunsInSeparateThreadNonBlockingTrigger() {
@@ -54,14 +52,11 @@ public class AsyncBehaviorScenariosTest {
         System.out.println("Async Thread ID (initial): " + result.getAsyncThreadId());
         System.out.println("Async Completed (initial): " + result.isAsyncCompleted());
 
-        // Measure main thread execution duration
-        long mainThreadDuration = result.getMainThreadEndTimeMillis() - result.getMainThreadStartTimeMillis();
+        long mainThreadDuration = result.getMainThreadEndTimeMillis()
+                - result.getMainThreadStartTimeMillis();
         System.out.println("Main thread execution duration: " + mainThreadDuration + "ms");
 
-        // Assert main thread did not block for async task
         assertTrue(mainThreadDuration < 100, "Main thread should not wait for async task completion");
-
-        // Wait until the async task completes (max 1 second)
         Awaitility.await()
                 .atMost(1, TimeUnit.SECONDS)
                 .until(result::isAsyncCompleted);
@@ -80,8 +75,7 @@ public class AsyncBehaviorScenariosTest {
 
     /**
      * Scenario 3a: Async method with void return type
-     *
-     * Verifies that async void methods execute independently without blocking the main thread.
+     *  Verifies that async void methods execute independently without blocking the main thread.
      */
     @Test
     void testAsyncVoidMethod() {
@@ -95,13 +89,12 @@ public class AsyncBehaviorScenariosTest {
 
     /**
      * Scenario 3b: Async method with Future<T> return type
-     *
-     * Verifies that async methods returning Future<T> can be awaited and return expected result.
+     *  Verifies that async methods returning Future<T> can be awaited and return expected result.
      */
     @Test
     void testAsyncFutureMethod() throws Exception {
         Future<String> future = asyncScenarios.asyncFutureMethod();
-        String result = future.get(); // Waits for async completion
+        String result = future.get(); // desc for async completion
         System.out.println("asyncFutureMethod result: " + result);
         assertEquals("Completed", result,
                 "Async Future<T> method should return expected result");

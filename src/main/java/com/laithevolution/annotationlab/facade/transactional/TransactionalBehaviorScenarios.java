@@ -16,9 +16,9 @@ public class TransactionalBehaviorScenarios {
 
     private final ClientService clientService;
 
-    /**
-     * Scenario 1: READ_ONLY
-     * Demonstrates read-only transaction
+    /**remark
+     *  Scenario 1: READ_ONLY
+     *  Demonstrates read-only transaction
      */
     @Transactional(readOnly = true)
     public List<Client> findAllClientsReadOnly() {
