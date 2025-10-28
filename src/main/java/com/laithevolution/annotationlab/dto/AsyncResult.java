@@ -17,4 +17,5 @@ public class AsyncResult {
     private Long startTimeMillis;
     private Long endTimeMillis;
     private Exception exception;
+    private String message;
 }
